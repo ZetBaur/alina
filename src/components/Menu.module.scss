@@ -23,9 +23,12 @@
   color: #4e4e4e;
   padding: 12px 0 12px 20px;
   border-radius: 0 13px 13px 0;
+
+  &:hover {
+    color: #aa9b9b;
+  }
 }
 
 .nav-name {
-  //   color: #4e4e4e;
   margin: 0 0 0 10px;
 }

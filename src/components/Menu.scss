@@ -1,4 +1,8 @@
 .active {
   color: #fff;
   background: #183e7e;
+
+  &:hover {
+    color: #fff;
+  }
 }
