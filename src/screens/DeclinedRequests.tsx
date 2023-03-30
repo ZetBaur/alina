@@ -1,5 +1,3 @@
-import React from 'react';
-
 function DeclinedRequests() {
   return <div>DeclinedRequests</div>;
 }
