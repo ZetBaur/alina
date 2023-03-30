@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
-import AgreedRequests from './screens/AgreedRequests';
-import Dashboard from './screens/Dashboard';
-import DeclinedRequests from './screens/DeclinedRequests';
-import NewRequest from './screens/NewRequest';
-import Requests from './screens/Requests';
+
+import {
+  AgreedRequests,
+  Dashboard,
+  DeclinedRequests,
+  NewRequest,
+  Requests,
+} from './screens';
 
 function App() {
   return (
