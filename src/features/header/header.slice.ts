@@ -19,14 +19,8 @@ const headerSlice = createSlice({
   initialState,
   reducers: {
     setPageTitle(state, action: PayloadAction<string>) {
-      console.log('action', action);
       state.pageTitle = action.payload;
     },
-
-    // setUser(state, action: PayloadAction<IUser>) {
-    //   state.user.name = action.payload;
-    //   state.user.image = action.payload;
-    // },
   },
 });
 
