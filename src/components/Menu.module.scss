@@ -1,7 +1,31 @@
-.link {
-  color: green;
+.menu {
+  width: 250px;
+  height: 100%;
+  background: #fff;
+  padding: 30px 0;
+  border-radius: 0 30px 30px 0;
 }
 
-.activeLink {
-  color: red;
+.logo {
+  color: #183e7e;
+  font-size: 45px;
+  padding: 0 0 0 25px;
+}
+
+.nav {
+  margin: 25px 0 0 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: #4e4e4e;
+  padding: 12px 0 12px 20px;
+  border-radius: 0 13px 13px 0;
+}
+
+.nav-name {
+  //   color: #4e4e4e;
+  margin: 0 0 0 10px;
 }
