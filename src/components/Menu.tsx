@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
+import styles from './Menu.module.scss';
 
 const Menu = () => {
   return (
     <nav>
       <NavLink
-        style={({ isActive }) =>
-          isActive ? { color: 'lightyellow', textDecoration: 'none' } : {}
+        className={({ isActive }) =>
+          isActive ? styles.activeLink : styles.link
         }
         to='.'
         end
@@ -13,17 +14,10 @@ const Menu = () => {
         Home
       </NavLink>
 
-      <NavLink to='courses'>Courses</NavLink>
-
       <NavLink
-        className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
-        to='about'
-      >
-        About
-      </NavLink>
-
-      <NavLink
-        className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
+        className={({ isActive }) =>
+          isActive ? styles.activeLink : styles.link
+        }
         to='contacts'
       >
         Contacts
