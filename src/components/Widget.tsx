@@ -1,5 +1,7 @@
+import styles from './Widget.module.scss';
+
 function Widget() {
-  return <div>Widget</div>;
+  return <header className={styles.widget}>Widget</header>;
 }
 
 export default Widget;

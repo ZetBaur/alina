@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
+import Header from '../components/Header';
 import Menu from '../components/Menu';
-import Widget from '../components/Widget';
 import styles from './MainLayout.module.scss';
 
 const MainLayout = () => {
@@ -9,7 +9,7 @@ const MainLayout = () => {
       <Menu />
 
       <main className={styles.main}>
-        <Widget />
+        <Header />
         <Outlet />
       </main>
     </>
