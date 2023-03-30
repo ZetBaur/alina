@@ -23,10 +23,10 @@ const headerSlice = createSlice({
       state.pageTitle = action.payload;
     },
 
-    setUser(state, action: PayloadAction<IUser>) {
-      state.user.name = action.username;
-      state.user.image = action.userImage;
-    },
+    // setUser(state, action: PayloadAction<IUser>) {
+    //   state.user.name = action.payload;
+    //   state.user.image = action.payload;
+    // },
   },
 });
 
