@@ -33,7 +33,12 @@ function Chart() {
       <div className={styles.title}>График курса валют</div>
 
       <ResponsiveContainer width='100%' height='50%'>
-        <AreaChart width={500} height={400} data={currencyData}>
+        <AreaChart
+          width={500}
+          height={400}
+          data={currencyData}
+          style={{ fontSize: '10px' }}
+        >
           <CartesianGrid strokeDasharray='10' vertical={false} />
 
           <XAxis
@@ -41,6 +46,7 @@ function Chart() {
             axisLine={false}
             tickLine={false}
             tick={<CustomizedAxisTick />}
+            style={{ fontSize: '10px' }}
           />
 
           <YAxis axisLine={false} tickLine={false} />

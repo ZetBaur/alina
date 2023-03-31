@@ -14,14 +14,24 @@ import { salesData } from '../data/chart.data';
 
 function SalesChart() {
   return (
-    <BarChart width={430} height={250} data={salesData} layout='vertical'>
-      <CartesianGrid strokeDasharray='3 3' />
-      <XAxis dataKey='name' />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey='pv' fill='#8884d8' />
-      <Bar dataKey='uv' fill='#82ca9d' />
+    <BarChart
+      width={430}
+      height={300}
+      data={salesData}
+      layout='vertical'
+      style={{ fontSize: '10px' }}
+    >
+      <XAxis axisLine={false} tickLine={false} dataKey='uv' type='number' />
+
+      <YAxis
+        dataKey='name'
+        type='category'
+        width={100}
+        axisLine={false}
+        tickLine={false}
+      />
+
+      <Bar dataKey='uv' fill='#183E7E' />
     </BarChart>
   );
 }
