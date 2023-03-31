@@ -1,6 +1,7 @@
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { useEffect } from 'react';
-import Chart from '../components/Chart';
+import CurrencyChart from '../components/CurrencyChart';
+import SalesChart from '../components/SalesChart';
 import styles from './Dashboard.module.scss';
 
 import { setPageTitle } from '../features/header/header.slice';
@@ -14,11 +15,11 @@ function Dashboard() {
 
   return (
     <div className={styles.dashboard}>
-      <div className={styles.title}>График курса валют</div>
+      {/* <div className={styles.title}>График курса валют</div> */}
 
-      <Chart />
+      <CurrencyChart />
 
-      <div></div>
+      <SalesChart />
     </div>
   );
 }
