@@ -1,11 +1,36 @@
 .dashboard {
   background: #fff;
-  padding: 35px;
+  padding: 25px;
   border-radius: 25px;
-  width: 100%;
   height: 100%;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
 }
 
-.row {
+.upper-row {
+  border: 1px solid black;
+  height: 50%;
+}
+
+.lower-row {
   display: flex;
+  flex-grow: 1;
+  width: 100%;
+  border: 3px solid orange;
+}
+
+.col-1 {
+  border: 1px solid green;
+  flex: 1;
+}
+
+.col-2 {
+  border: 1px solid red;
+  flex: 1;
+}
+
+.col-3 {
+  border: 1px solid blue;
+  flex: 1;
 }

@@ -2,10 +2,10 @@ import { useAppDispatch } from '../hooks/reduxHooks';
 import { useEffect } from 'react';
 import CurrencyChart from '../components/CurrencyChart';
 import SalesChart from '../components/SalesChart';
+import StatisticsChart from '../components/StatisticsChart';
 import styles from './Dashboard.module.scss';
 
 import { setPageTitle } from '../features/header/header.slice';
-import StatisticsChart from '../components/StatisticsChart';
 
 function Dashboard() {
   const dispatch = useAppDispatch();
@@ -16,13 +16,20 @@ function Dashboard() {
 
   return (
     <div className={styles.dashboard}>
-      <CurrencyChart />
-      <br />
-      <br />
+      <div className={styles.upperRow}>
+        <CurrencyChart />
+      </div>
 
-      <div className={styles.row}>
-        <SalesChart />
-        <StatisticsChart />
+      <div className={styles.lowerRow}>
+        <div className={styles.col1}>
+          <SalesChart />
+        </div>
+
+        <div className={styles.col2}>
+          <StatisticsChart />
+        </div>
+
+        <div className={styles.col3}>{/* <StatisticsChart /> */}</div>
       </div>
     </div>
   );
