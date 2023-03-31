@@ -3,14 +3,12 @@
   padding: 25px;
   border-radius: 25px;
   height: 100%;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 .upper-row {
-  border: 1px solid black;
   height: 50%;
   display: flex;
   flex-direction: column;
@@ -19,7 +17,6 @@
 .lower-row {
   display: flex;
   height: 50%;
-  border: 3px solid orange;
 }
 
 .chart {
@@ -27,19 +24,16 @@
 }
 
 .col-1 {
-  border: 1px solid green;
   flex: 3;
   padding: 0 10px 0 0;
 }
 
 .col-2 {
-  border: 1px solid red;
   flex: 3;
   padding: 0 10px 0 10px;
 }
 
 .col-3 {
-  border: 1px solid blue;
   flex: 2;
   padding: 0 0 0 10px;
 }

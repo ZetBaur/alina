@@ -10,9 +10,6 @@ import {
 } from 'recharts';
 import { currencyData } from '../data/chart.data';
 
-// import Title from './Title';
-// import styles from './CurrencyChart.module.scss';
-
 const CustomizedAxisTick: FunctionComponent<any> = (props: any) => {
   const { x, y, payload } = props;
 
@@ -46,7 +43,11 @@ function CurrencyChart() {
           style={{ fontSize: '10px' }}
         />
 
-        <YAxis axisLine={false} tickLine={false} />
+        <YAxis
+          axisLine={false}
+          tickLine={false}
+          domain={['400 - dataMin', 'dataMax']}
+        />
 
         <Tooltip
           contentStyle={{

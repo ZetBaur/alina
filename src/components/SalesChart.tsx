@@ -2,10 +2,6 @@ import { FunctionComponent } from 'react';
 
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 
-// import styles from './SalesChart.module.scss';
-
-// import Title from './Title';
-
 import { salesData } from '../data/chart.data';
 
 const CustomizedAxisTick: FunctionComponent<any> = (props: any) => {
