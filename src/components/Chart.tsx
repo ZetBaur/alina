@@ -1,5 +1,3 @@
-import styles from './Chart.module.scss';
-
 import {
   AreaChart,
   Area,
@@ -14,34 +12,39 @@ import { data } from '../data/chart.data';
 
 function Chart() {
   return (
-    <div className={styles.chart}>
-      <div>График курса валют</div>
-      <ResponsiveContainer width='100%' height='100%'>
-        <AreaChart width={500} height={400} data={data}>
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='name' />
-          <YAxis />
-          <Tooltip />
+    <ResponsiveContainer width='100%' height='100%'>
+      <AreaChart width={500} height={400} data={data}>
+        <CartesianGrid strokeDasharray='10' vertical={false} />
+        <XAxis dataKey='name' axisLine={false} tickLine={false} />
+        <YAxis axisLine={false} tickLine={false} />
+        <Tooltip
+          contentStyle={{
+            background: '#30528B',
+            color: '#fff',
+            fontSize: '10px',
+            borderRadius: '5px',
+          }}
+        />
 
-          <Area
-            type='monotone'
-            dataKey='pv'
-            stackId='1'
-            stroke='#54C3A3'
-            strokeWidth={2}
-            fill='#A4B6D5'
-          />
-          <Area
-            type='monotone'
-            dataKey='uv'
-            stackId='1'
-            stroke='#E58C91'
-            strokeWidth={2}
-            fill='#CEDDEB'
-          />
-        </AreaChart>
-      </ResponsiveContainer>
-    </div>
+        <Area
+          type='monotone'
+          dataKey='покупка'
+          stackId='1'
+          stroke='green'
+          strokeWidth={2}
+          fill='#CEDDEB'
+        />
+
+        <Area
+          type='monotone'
+          dataKey='продажа'
+          stackId='2'
+          stroke='red'
+          strokeWidth={2}
+          fill='#A4B6D5'
+        />
+      </AreaChart>
+    </ResponsiveContainer>
   );
 }
 

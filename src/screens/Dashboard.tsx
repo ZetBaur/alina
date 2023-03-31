@@ -1,10 +1,9 @@
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { useEffect } from 'react';
 import Chart from '../components/Chart';
+import styles from './Dashboard.module.scss';
 
 import { setPageTitle } from '../features/header/header.slice';
-
-import styles from './Dashboard.module.scss';
 
 function Dashboard() {
   const dispatch = useAppDispatch();
@@ -13,7 +12,15 @@ function Dashboard() {
     dispatch(setPageTitle('Дашборд: Анализ заявок компании'));
   }, []);
 
-  return <Chart />;
+  return (
+    <div className={styles.dashboard}>
+      <div className={styles.title}>График курса валют</div>
+
+      <Chart />
+
+      <div></div>
+    </div>
+  );
 }
 
 export default Dashboard;
