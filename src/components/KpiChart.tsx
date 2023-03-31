@@ -15,7 +15,7 @@ function KpiChart() {
       <PieChart style={{ fontSize: '10px' }}>
         <Pie data={kpiData} innerRadius={45} outerRadius={60} dataKey='value'>
           <Cell fill='#fff' />
-          <Cell fill='red' />
+          <Cell fill='green' />
 
           <Label value='63%' position='center' style={{ fontSize: '20px' }} />
         </Pie>
