@@ -35,7 +35,7 @@ function SalesChart() {
         <YAxis
           dataKey='name'
           type='category'
-          width={70}
+          // width={70}
           axisLine={false}
           tickLine={false}
         />

@@ -7,6 +7,7 @@ import styles from './Dashboard.module.scss';
 import Title from '../components/Title';
 
 import { setPageTitle } from '../features/header/header.slice';
+import KpiChart from '../components/KpiChart';
 
 function Dashboard() {
   const dispatch = useAppDispatch();
@@ -35,7 +36,7 @@ function Dashboard() {
         </div>
 
         <div className={styles.col2}>
-          <Title title='График курса валют' feature='Доллар' />
+          <Title title='Статистика заявок' feature='за год' />
 
           <div className={styles.chart}>
             <StatisticsChart />
@@ -43,9 +44,11 @@ function Dashboard() {
         </div>
 
         <div className={styles.col3}>
-          <Title title='График курса валют' feature='Доллар' />
+          <Title title='Статистика заявок' feature='за год' />
 
-          <div className={styles.chart}>{/* <StatisticsChart /> */}</div>
+          <div className={styles.chart}>
+            <KpiChart />
+          </div>
         </div>
       </div>
     </div>
