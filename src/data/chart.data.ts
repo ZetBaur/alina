@@ -220,6 +220,6 @@ export const statisticsData = [
 ];
 
 export const kpiData = [
-  { name: 'Прирост за день', value: 27 },
-  { name: '', value: 63 },
+  { name: '', value: 27 },
+  { name: 'Прирост за день', value: 63 },
 ];
