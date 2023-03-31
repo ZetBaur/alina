@@ -15,9 +15,9 @@ function Dashboard() {
 
   return (
     <div className={styles.dashboard}>
-      {/* <div className={styles.title}>График курса валют</div> */}
-
       <CurrencyChart />
+      <br />
+      <br />
 
       <SalesChart />
     </div>

@@ -1,6 +1,4 @@
 import { FunctionComponent } from 'react';
-import styles from './CurrencyChart.module.scss';
-
 import {
   AreaChart,
   Area,
@@ -10,8 +8,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-
 import { currencyData } from '../data/chart.data';
+import Title from './Title';
 
 const CustomizedAxisTick: FunctionComponent<any> = (props: any) => {
   const { x, y, payload } = props;
@@ -30,7 +28,7 @@ const CustomizedAxisTick: FunctionComponent<any> = (props: any) => {
 function Chart() {
   return (
     <>
-      <div className={styles.title}>График курса валют</div>
+      <Title title='График курса валют' feature='Доллар' />
 
       <ResponsiveContainer width='100%' height='50%'>
         <AreaChart

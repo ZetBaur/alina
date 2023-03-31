@@ -33,11 +33,6 @@ const CustomizedAxisTick: FunctionComponent<any> = (props: any) => {
 function SalesChart() {
   return (
     <>
-      {/* <div className={styles.title}>График курса валют</div>
-       */}
-
-      {/* <Title>Продажи по Казахстану</Title> */}
-
       <Title title='Продажи по Казахстану' feature='за год' />
 
       <BarChart
