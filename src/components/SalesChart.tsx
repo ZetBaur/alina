@@ -22,14 +22,8 @@ const CustomizedAxisTick: FunctionComponent<any> = (props: any) => {
 
 function SalesChart() {
   return (
-    <ResponsiveContainer width='100%' height='100%'>
-      <BarChart
-        width={500}
-        height={300}
-        data={salesData}
-        layout='vertical'
-        style={{ fontSize: '10px' }}
-      >
+    <ResponsiveContainer width='100%' height='80%'>
+      <BarChart data={salesData} layout='vertical' style={{ fontSize: '10px' }}>
         <XAxis
           tick={<CustomizedAxisTick />}
           axisLine={false}
@@ -41,7 +35,7 @@ function SalesChart() {
         <YAxis
           dataKey='name'
           type='category'
-          width={100}
+          width={70}
           axisLine={false}
           tickLine={false}
         />

@@ -159,40 +159,40 @@ export const currencyData = [
 export const salesData = [
   {
     name: 'Алматы',
-    uv: 4000,
+    uv: 4,
   },
   {
     name: 'Астана',
-    uv: 3000,
+    uv: 3,
   },
   {
     name: 'Караганда',
-    uv: 2000,
+    uv: 2,
   },
   {
     name: 'Атырау',
-    uv: 2780,
+    uv: 2,
   },
   {
     name: 'Актобе',
-    uv: 1890,
+    uv: 1,
   },
   {
     name: 'Актау',
-    uv: 2390,
+    uv: 2,
   },
   {
     name: 'Кызылорда',
-    uv: 3490,
+    uv: 3,
   },
 
   {
     name: 'Шымкент',
-    uv: 3490,
+    uv: 2,
   },
 ];
 
-const statisticsData = [
+export const statisticsData = [
   {
     name: 'Page A',
     uv: 4000,
