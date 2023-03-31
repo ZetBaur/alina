@@ -32,35 +32,37 @@ const CustomizedAxisTick: FunctionComponent<any> = (props: any) => {
 
 function SalesChart() {
   return (
-    <>
+    <div style={{ height: '200px' }}>
       <Title title='Продажи по Казахстану' feature='за год' />
 
-      <BarChart
-        width={430}
-        height={300}
-        data={salesData}
-        layout='vertical'
-        style={{ fontSize: '10px' }}
-      >
-        <XAxis
-          tick={<CustomizedAxisTick />}
-          axisLine={false}
-          tickLine={false}
-          dataKey='uv'
-          type='number'
-        />
+      <ResponsiveContainer width='100%' height='100%'>
+        <BarChart
+          width={430}
+          height={300}
+          data={salesData}
+          layout='vertical'
+          style={{ fontSize: '10px' }}
+        >
+          <XAxis
+            tick={<CustomizedAxisTick />}
+            axisLine={false}
+            tickLine={false}
+            dataKey='uv'
+            type='number'
+          />
 
-        <YAxis
-          dataKey='name'
-          type='category'
-          width={100}
-          axisLine={false}
-          tickLine={false}
-        />
+          <YAxis
+            dataKey='name'
+            type='category'
+            width={100}
+            axisLine={false}
+            tickLine={false}
+          />
 
-        <Bar dataKey='uv' fill='#183E7E' />
-      </BarChart>
-    </>
+          <Bar dataKey='uv' fill='#183E7E' />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
 

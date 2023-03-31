@@ -5,6 +5,7 @@ import SalesChart from '../components/SalesChart';
 import styles from './Dashboard.module.scss';
 
 import { setPageTitle } from '../features/header/header.slice';
+import StatisticsChart from '../components/StatisticsChart';
 
 function Dashboard() {
   const dispatch = useAppDispatch();
@@ -19,7 +20,10 @@ function Dashboard() {
       <br />
       <br />
 
-      <SalesChart />
+      <div className={styles.row}>
+        <SalesChart />
+        <StatisticsChart />
+      </div>
     </div>
   );
 }
