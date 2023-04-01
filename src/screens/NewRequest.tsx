@@ -1,57 +1,141 @@
 import { useState } from 'react';
 import {
   Box,
+  Checkbox,
   FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  InputAdornment,
   InputLabel,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
-  SelectChangeEvent,
   TextField,
 } from '@mui/material';
 import styles from './NewRequest.module.scss';
 
 function NewRequest() {
-  const [selectedOption, setSelectedOption] = useState('classic');
+  const [requestName, setRequestName] = useState('');
+  const [requestAmount, setRequestAmount] = useState('');
 
-  const selectChange = (e: SelectChangeEvent) => {
-    setSelectedOption(e.target.value);
-  };
+  const [typeValue, setTypeValue] = useState('classic');
+  const [confirmValue, setConfirmValue] = useState('classic');
+  const [getEmailChecked, setGetEmailChecked] = useState(false);
+  const [getSmsChecked, setGetSmsChecked] = useState(false);
 
   return (
     <div className={styles.newRequest}>
-      <Box>
-        <FormControl>
+      <div>
+        <Box sx={{ marginBottom: '25px' }}>
           <TextField
+            error={!requestName}
+            fullWidth
             id='outlined-basic'
-            label='Название заявки'
-            variant='outlined'
+            label='Название заявки*'
+            variant='filled'
+            value={requestName}
+            onChange={(event) => {
+              setRequestName(event.target.value);
+            }}
           />
-        </FormControl>
-      </Box>
+        </Box>
 
-      <Box>
-        <FormControl>
+        <Box sx={{ marginBottom: '25px' }}>
           <TextField
             id='outlined-basic'
             label='Сумма заявки'
-            variant='outlined'
+            variant='filled'
+            InputProps={{
+              endAdornment: <InputAdornment position='end'>T</InputAdornment>,
+              inputMode: 'numeric',
+            }}
+            type='number'
+            value={requestAmount}
+            onChange={(event) => {
+              setRequestAmount(event.target.value);
+            }}
           />
-        </FormControl>
 
-        <FormControl>
-          <InputLabel id='request-type'>Тип заявки</InputLabel>
-          <Select
-            labelId='request-type'
-            id='request-type'
-            value={selectedOption}
-            label='Тип заявки'
-            onChange={selectChange}
-          >
-            <MenuItem value='classic'>Классический</MenuItem>
-            <MenuItem value='standart'>Стандартный</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
+          <FormControl>
+            <InputLabel id='request-type'>Тип заявки</InputLabel>
+            <Select
+              error={!typeValue}
+              labelId='request-type'
+              id='request-type'
+              value={typeValue}
+              label='Тип заявки*'
+              variant='filled'
+              onChange={(e) => {
+                setTypeValue(e.target.value);
+              }}
+            >
+              <MenuItem value='classic'>Классический</MenuItem>
+              <MenuItem value='standart'>Стандартный</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+
+        <Box sx={{ marginBottom: '25px' }}>
+          <FormControl>
+            <FormLabel id='confirm'>Позвонить для подтверждения</FormLabel>
+
+            <RadioGroup
+              row
+              aria-labelledby='confirm'
+              defaultValue='yes'
+              name='radio-buttons-group'
+              value={confirmValue}
+              onChange={(e) => {
+                setConfirmValue((e.target as HTMLInputElement).value);
+              }}
+            >
+              <FormControlLabel value='yes' control={<Radio />} label='да' />
+
+              <FormControlLabel value='no' control={<Radio />} label='нет' />
+            </RadioGroup>
+          </FormControl>
+        </Box>
+
+        <Box sx={{ marginBottom: '25px' }}>
+          <FormControl component='fieldset' variant='standard'>
+            <FormLabel component='legend'>
+              Получать дополнительную информацию
+            </FormLabel>
+
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={getEmailChecked}
+                    onChange={(event) => {
+                      setGetEmailChecked(event.target.checked);
+                    }}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                  />
+                }
+                label='Письма на почту'
+              />
+
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={getSmsChecked}
+                    onChange={(event) => {
+                      setGetSmsChecked(event.target.checked);
+                    }}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                  />
+                }
+                label='СМС на телефон'
+              />
+            </FormGroup>
+          </FormControl>
+        </Box>
+
+        <Box>*-обязательные поля</Box>
+      </div>
     </div>
   );
 }

@@ -1,12 +1,5 @@
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { useEffect } from 'react';
-
-// import CurrencyChart from '../components/CurrencyChart';
-// import SalesChart from '../components/SalesChart';
-// import StatisticsChart from '../components/StatisticsChart';
-// import Title from '../components/Title';
-// import KpiChart from '../components/KpiChart';
-
 import {
   CurrencyChart,
   SalesChart,
@@ -15,7 +8,6 @@ import {
   KpiChart,
 } from '../components';
 import styles from './Dashboard.module.scss';
-
 import { setPageTitle } from '../features/header/header.slice';
 
 function Dashboard() {
