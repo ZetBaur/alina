@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
-
+import { IMaskInput } from 'react-imask';
 import {
   Box,
   Checkbox,
@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import styles from './NewRequest.module.scss';
 import { setPageTitle } from '../features/header/header.slice';
+import { cities } from '../data/new.request.data';
 
 function NewRequest() {
   const [requestName, setRequestName] = useState('');
@@ -26,6 +27,8 @@ function NewRequest() {
   const [confirmValue, setConfirmValue] = useState('yes');
   const [getEmailChecked, setGetEmailChecked] = useState(false);
   const [getSmsChecked, setGetSmsChecked] = useState(false);
+  const [claimersNumber, setClaimersNumber] = useState('');
+  const [cityValue, setCityValue] = useState('Алматы');
 
   const dispatch = useAppDispatch();
 
@@ -144,6 +147,62 @@ function NewRequest() {
         </Box>
 
         <Box>*-обязательные поля</Box>
+      </div>
+
+      <div>
+        <Box sx={{ marginBottom: '25px' }}>
+          <TextField
+            id='outlined-number'
+            label='Количество заявителей'
+            type='number'
+            variant='filled'
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={claimersNumber}
+            onChange={(event) => {
+              setClaimersNumber(event.target.value);
+            }}
+          />
+        </Box>
+
+        <Box sx={{ marginBottom: '25px' }}>
+          <FormControl>
+            <InputLabel id='city'>Город</InputLabel>
+            <Select
+              labelId='city'
+              id='city'
+              value={cityValue}
+              label='Город'
+              variant='filled'
+              defaultValue=''
+              onChange={(e) => {
+                setCityValue(e.target.value);
+              }}
+            >
+              {cities.map((el, idx) => (
+                <MenuItem key={idx} value={el}>
+                  {el}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+      </div>
+
+      <div>
+        <IMaskInput
+          {...other}
+          mask='(#00) 000-0000'
+          definitions={{
+            '#': /[1-9]/,
+          }}
+          inputRef={ref}
+          onAccept={(value: any) =>
+            onChange({ target: { name: props.name, value } })
+          }
+          overwrite
+        />
       </div>
     </div>
   );
