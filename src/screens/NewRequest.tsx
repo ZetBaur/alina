@@ -1,6 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, SetStateAction } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
-import { IMaskInput } from 'react-imask';
 import {
   Box,
   Checkbox,
@@ -16,6 +15,17 @@ import {
   Select,
   TextField,
 } from '@mui/material';
+
+//theme
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+
+//core
+import 'primereact/resources/primereact.min.css';
+
+//icons
+import 'primeicons/primeicons.css';
+import { InputMask } from 'primereact/inputmask';
+
 import styles from './NewRequest.module.scss';
 import { setPageTitle } from '../features/header/header.slice';
 import { cities } from '../data/new.request.data';
@@ -29,6 +39,7 @@ function NewRequest() {
   const [getSmsChecked, setGetSmsChecked] = useState(false);
   const [claimersNumber, setClaimersNumber] = useState('');
   const [cityValue, setCityValue] = useState('Алматы');
+  const [phoneInput, setPhoneInput] = useState('');
 
   const dispatch = useAppDispatch();
 
@@ -191,17 +202,12 @@ function NewRequest() {
       </div>
 
       <div>
-        <IMaskInput
-          {...other}
-          mask='(#00) 000-0000'
-          definitions={{
-            '#': /[1-9]/,
+        <InputMask
+          value={phoneInput}
+          onChange={(e) => {
+            setPhoneInput(e.target.value);
           }}
-          inputRef={ref}
-          onAccept={(value: any) =>
-            onChange({ target: { name: props.name, value } })
-          }
-          overwrite
+          mask='+7(999)999-99-99'
         />
       </div>
     </div>
