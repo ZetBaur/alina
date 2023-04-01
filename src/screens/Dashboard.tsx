@@ -44,7 +44,7 @@ function Dashboard() {
         </div>
 
         <div className={styles.col3}>
-          <Title title='KPI за деь' feature='за день' />
+          <Title title='KPI' feature='за день' />
 
           <div className={styles.chart}>
             <KpiChart />
