@@ -1,6 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import Header from '../components/Header';
-import Menu from '../components/Menu';
+// import Header from '../components/Header';
+// import Menu from '../components/Menu';
+// import ScreenWrapper from '../components/ScreenWrapper';
+
+import { Header, Menu, ScreenWrapper } from '../components';
 import styles from './MainLayout.module.scss';
 
 const MainLayout = () => {
@@ -10,7 +13,10 @@ const MainLayout = () => {
 
       <main className={styles.main}>
         <Header />
-        <Outlet />
+
+        <ScreenWrapper>
+          <Outlet />
+        </ScreenWrapper>
       </main>
     </>
   );
