@@ -198,6 +198,7 @@ function NewRequest() {
 
       <div>
         <InputMask
+          className={styles.input}
           value={phoneInput}
           onChange={(e) => {
             setPhoneInput(e.target.value);
