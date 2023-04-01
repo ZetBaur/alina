@@ -17,7 +17,7 @@ function KpiChart() {
           <Cell fill='#fff' />
           <Cell fill='green' />
 
-          <Label value='63%' position='center' style={{ fontSize: '20px' }} />
+          <Label value='+ 2%' position='center' style={{ fontSize: '20px' }} />
         </Pie>
 
         <Legend iconType='triangle' />
