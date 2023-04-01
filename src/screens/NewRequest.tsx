@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../hooks/reduxHooks';
+
 import {
   Box,
   Checkbox,
@@ -15,15 +17,21 @@ import {
   TextField,
 } from '@mui/material';
 import styles from './NewRequest.module.scss';
+import { setPageTitle } from '../features/header/header.slice';
 
 function NewRequest() {
   const [requestName, setRequestName] = useState('');
   const [requestAmount, setRequestAmount] = useState('');
-
   const [typeValue, setTypeValue] = useState('classic');
-  const [confirmValue, setConfirmValue] = useState('classic');
+  const [confirmValue, setConfirmValue] = useState('yes');
   const [getEmailChecked, setGetEmailChecked] = useState(false);
   const [getSmsChecked, setGetSmsChecked] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setPageTitle('Новая заявка'));
+  }, []);
 
   return (
     <div className={styles.newRequest}>
@@ -44,6 +52,7 @@ function NewRequest() {
 
         <Box sx={{ marginBottom: '25px' }}>
           <TextField
+            sx={{ marginRight: '25px' }}
             id='outlined-basic'
             label='Сумма заявки'
             variant='filled'
