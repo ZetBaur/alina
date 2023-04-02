@@ -1,17 +1,13 @@
 .new-request {
   display: flex;
   column-gap: 20px;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
 }
 
 .input {
-  // border: none;
   height: 40px;
   position: relative;
-  // border-bottom: 1px solid rgba(0, 0, 0, 0.42);
-  // border-radius: 0;
   background: #f2f2f2;
-  // outline: none;
 }
 
 .col-1 {

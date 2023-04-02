@@ -85,11 +85,23 @@ function NewRequest() {
   };
 
   const handleSubmit = () => {
-    if (!requestName || !phoneInput || !typeValue) {
+    if (!requestName) {
       setAlert({
         severity: 'error',
         show: true,
-        text: 'Заполните обязательные поля',
+        text: 'Заполните название заявки',
+      });
+    } else if (!phoneInput) {
+      setAlert({
+        severity: 'error',
+        show: true,
+        text: 'Заполните номер телефона',
+      });
+    } else if (!typeValue) {
+      setAlert({
+        severity: 'error',
+        show: true,
+        text: 'Укажите тип заявки',
       });
     } else {
       setAlert({
@@ -106,7 +118,7 @@ function NewRequest() {
     <div>
       <div className={styles.newRequest}>
         <div className={styles.col1}>
-          <Box sx={{ marginBottom: '25px' }}>
+          <Box sx={{ marginBottom: '20px' }}>
             <InputLabel shrink id='requestName'>
               Название заявки <span className={styles.asteriks}>*</span>
             </InputLabel>
@@ -125,7 +137,7 @@ function NewRequest() {
             />
           </Box>
 
-          <Box sx={{ marginBottom: '25px', display: 'flex', flexWrap: 'wrap' }}>
+          <Box sx={{ display: 'flex' }}>
             <Box sx={{ marginRight: '25px', marginBottom: '16px' }}>
               <InputLabel shrink id='requestAmount'>
                 Сумма заявки
@@ -172,7 +184,7 @@ function NewRequest() {
             </Box>
           </Box>
 
-          <Box sx={{ marginBottom: '25px' }}>
+          <Box sx={{ marginBottom: '20px' }}>
             <FormLabel id='confirm'>Позвонить для подтверждения</FormLabel>
 
             <RadioGroup
@@ -191,7 +203,7 @@ function NewRequest() {
             </RadioGroup>
           </Box>
 
-          <Box sx={{ marginBottom: '25px' }}>
+          <Box sx={{ marginBottom: '20px' }}>
             <FormLabel component='legend'>
               Получать дополнительную информацию
             </FormLabel>
@@ -227,7 +239,7 @@ function NewRequest() {
         </div>
 
         <div className={styles.col2}>
-          <Box sx={{ marginBottom: '25px' }}>
+          <Box sx={{ marginBottom: '20px' }}>
             <InputLabel shrink id='request-type'>
               Количество заявителей
             </InputLabel>
@@ -243,7 +255,7 @@ function NewRequest() {
             />
           </Box>
 
-          <Box sx={{ marginBottom: '25px' }}>
+          <Box sx={{ marginBottom: '20px' }}>
             <InputLabel shrink id='city'>
               Город
             </InputLabel>
@@ -357,10 +369,6 @@ function NewRequest() {
           {alert.text}
         </Alert>
       </Collapse>
-
-      <button onClick={() => setAlert({ ...alert, show: true })}>
-        hhhhhhhh
-      </button>
     </div>
   );
 }
