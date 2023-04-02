@@ -1,6 +1,7 @@
 .new-request {
   display: flex;
   column-gap: 20px;
+  flex-wrap: wrap;
 }
 
 .input {
@@ -11,6 +12,21 @@
   // border-radius: 0;
   background: #f2f2f2;
   // outline: none;
+}
+
+.col-1 {
+  flex: 3;
+}
+
+.col-2 {
+  flex: 1;
+}
+
+.col-3 {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .placeholder {

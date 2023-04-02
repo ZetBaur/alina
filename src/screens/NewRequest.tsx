@@ -53,7 +53,7 @@ function NewRequest() {
 
   return (
     <div className={styles.newRequest}>
-      <div>
+      <div className={styles.col1}>
         <Box sx={{ marginBottom: '25px' }}>
           <InputLabel shrink id='requestName'>
             Название заявки*
@@ -73,8 +73,8 @@ function NewRequest() {
           />
         </Box>
 
-        <Box sx={{ marginBottom: '25px', display: 'flex' }}>
-          <Box sx={{ marginRight: '25px' }}>
+        <Box sx={{ marginBottom: '25px', display: 'flex', flexWrap: 'wrap' }}>
+          <Box sx={{ marginRight: '25px', marginBottom: '16px' }}>
             <InputLabel shrink id='requestAmount'>
               Сумма заявки
             </InputLabel>
@@ -172,7 +172,7 @@ function NewRequest() {
         </Box>
       </div>
 
-      <div>
+      <div className={styles.col2}>
         <Box sx={{ marginBottom: '25px' }}>
           <InputLabel shrink id='request-type'>
             Количество заявителей
@@ -223,7 +223,7 @@ function NewRequest() {
         </Box>
       </div>
 
-      <div>
+      <div className={styles.col3}>
         <Box>
           <InputLabel shrink id='city'>
             Номер телефона*
