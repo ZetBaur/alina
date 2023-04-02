@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import {
+  Alert,
+  AlertProps,
   Box,
   Button,
   Checkbox,
-  FormControl,
   FormControlLabel,
   FormGroup,
   FormLabel,
@@ -71,7 +72,7 @@ function NewRequest() {
         <div className={styles.col1}>
           <Box sx={{ marginBottom: '25px' }}>
             <InputLabel shrink id='requestName'>
-              Название заявки*
+              Название заявки <span className={styles.asteriks}>*</span>
             </InputLabel>
 
             <TextField
@@ -115,7 +116,7 @@ function NewRequest() {
 
             <Box>
               <InputLabel shrink id='request-type'>
-                Тип заявки*
+                Тип заявки <span className={styles.asteriks}>*</span>
               </InputLabel>
 
               <Select
@@ -245,7 +246,7 @@ function NewRequest() {
         <div className={styles.col3}>
           <Box>
             <InputLabel shrink id='city'>
-              Номер телефона*
+              Номер телефона <span className={styles.asteriks}>*</span>
             </InputLabel>
 
             <InputMask
@@ -296,6 +297,10 @@ function NewRequest() {
           </Button>
         </Stack>
       </div>
+
+      <Alert variant='filled' severity='error'>
+        This is an error alert — check it out!
+      </Alert>
     </div>
   );
 }
