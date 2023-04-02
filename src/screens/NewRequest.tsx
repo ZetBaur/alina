@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useState } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import {
   Alert,
+  AlertColor,
   AlertProps,
   Box,
   Button,
@@ -40,8 +41,10 @@ import styles from './NewRequest.module.scss';
 import { setPageTitle } from '../features/header/header.slice';
 import { cities } from '../data/new.request.data';
 
-export interface IAlert extends SnackbarOrigin {
-  open: boolean;
+interface IAlert {
+  show: boolean;
+  severity: AlertColor | undefined;
+  text: string | null;
 }
 
 function NewRequest() {
@@ -57,7 +60,11 @@ function NewRequest() {
   const [requestDate, setRequestDate] = useState<Dayjs | null>(
     dayjs(dayjs(Date()).format().slice(0, 10))
   );
-  const [alert, setAlert] = useState(false);
+  const [alert, setAlert] = useState<IAlert>({
+    show: false,
+    severity: 'success',
+    text: null,
+  });
 
   const dispatch = useAppDispatch();
 
@@ -77,7 +84,23 @@ function NewRequest() {
     setPhoneInput('');
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    if (!requestName || !phoneInput || !typeValue) {
+      setAlert({
+        severity: 'error',
+        show: true,
+        text: 'Заполните обязательные поля',
+      });
+    } else {
+      setAlert({
+        severity: 'success',
+        show: true,
+        text: 'Заявка успешно отправлена',
+      });
+
+      clearForm();
+    }
+  };
 
   return (
     <div>
@@ -316,26 +339,28 @@ function NewRequest() {
       <br />
       <br />
 
-      <Collapse in={alert} className={styles.alert}>
+      <Collapse in={alert.show} className={styles.alert}>
         <Alert
           variant='filled'
-          severity='error'
+          severity={alert.severity}
           action={
             <IconButton
               aria-label='close'
               color='inherit'
               size='small'
-              onClick={() => setAlert(false)}
+              onClick={() => setAlert({ ...alert, show: false })}
             >
               <IoMdClose />
             </IconButton>
           }
         >
-          Close me!
+          {alert.text}
         </Alert>
       </Collapse>
 
-      <button onClick={() => setAlert(true)}>hhhhhhhh</button>
+      <button onClick={() => setAlert({ ...alert, show: true })}>
+        hhhhhhhh
+      </button>
     </div>
   );
 }
