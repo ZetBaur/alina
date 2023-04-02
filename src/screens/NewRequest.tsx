@@ -40,7 +40,7 @@ function NewRequest() {
   const [getEmailChecked, setGetEmailChecked] = useState(false);
   const [getSmsChecked, setGetSmsChecked] = useState(false);
   const [claimersNumber, setClaimersNumber] = useState('');
-  const [cityValue, setCityValue] = useState('Алматы');
+  const [cityValue, setCityValue] = useState('');
   const [phoneInput, setPhoneInput] = useState('');
   const [requestDate, setRequestDate] = useState<Dayjs | null>(
     dayjs('2022-08-17')
@@ -183,15 +183,16 @@ function NewRequest() {
         </Box>
 
         <Box sx={{ marginBottom: '25px' }}>
-          <FormControl>
+          <FormControl fullWidth>
             <InputLabel id='city'>Город</InputLabel>
+
             <Select
               labelId='city'
-              id='city'
-              value={cityValue}
+              id='demo'
               label='Город'
               variant='filled'
-              defaultValue=''
+              defaultValue='Выберите Ваш город'
+              value={cityValue}
               onChange={(e) => {
                 setCityValue(e.target.value);
               }}
