@@ -42,7 +42,9 @@ function NewRequest() {
   const [claimersNumber, setClaimersNumber] = useState('');
   const [cityValue, setCityValue] = useState('Алматы');
   const [phoneInput, setPhoneInput] = useState('');
-  const [requestDate, setRequestDate] = useState<Dayjs | null>(dayjs(''));
+  const [requestDate, setRequestDate] = useState<Dayjs | null>(
+    dayjs('2022-08-17')
+  );
 
   const dispatch = useAppDispatch();
 
@@ -220,7 +222,9 @@ function NewRequest() {
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='ru'>
             <DateCalendar
               value={requestDate}
-              onChange={(newValue) => setRequestDate(newValue)}
+              onChange={(newValue) => {
+                setRequestDate(newValue);
+              }}
             />
           </LocalizationProvider>
         </Box>
