@@ -6,18 +6,24 @@ import {
   Box,
   Button,
   Checkbox,
+  Collapse,
   FormControlLabel,
   FormGroup,
   FormLabel,
+  IconButton,
   InputAdornment,
   InputLabel,
   MenuItem,
   Radio,
   RadioGroup,
   Select,
+  Snackbar,
+  SnackbarOrigin,
   Stack,
   TextField,
 } from '@mui/material';
+
+import { IoMdClose } from 'react-icons/io';
 
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -34,6 +40,10 @@ import styles from './NewRequest.module.scss';
 import { setPageTitle } from '../features/header/header.slice';
 import { cities } from '../data/new.request.data';
 
+export interface IAlert extends SnackbarOrigin {
+  open: boolean;
+}
+
 function NewRequest() {
   const [requestName, setRequestName] = useState('');
   const [requestAmount, setRequestAmount] = useState('');
@@ -47,6 +57,7 @@ function NewRequest() {
   const [requestDate, setRequestDate] = useState<Dayjs | null>(
     dayjs(dayjs(Date()).format().slice(0, 10))
   );
+  const [alert, setAlert] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -65,6 +76,8 @@ function NewRequest() {
     setCityValue('');
     setPhoneInput('');
   };
+
+  const handleSubmit = () => {};
 
   return (
     <div>
@@ -277,7 +290,10 @@ function NewRequest() {
 
       <div className={styles.buttons}>
         <Stack spacing={5} direction='row'>
-          <Button variant='contained'>Отправить</Button>
+          <Button variant='contained' onClick={handleSubmit}>
+            Отправить
+          </Button>
+
           <Button
             variant='outlined'
             disabled={
@@ -297,10 +313,29 @@ function NewRequest() {
           </Button>
         </Stack>
       </div>
+      <br />
+      <br />
 
-      <Alert variant='filled' severity='error'>
-        This is an error alert — check it out!
-      </Alert>
+      <Collapse in={alert} className={styles.alert}>
+        <Alert
+          variant='filled'
+          severity='error'
+          action={
+            <IconButton
+              aria-label='close'
+              color='inherit'
+              size='small'
+              onClick={() => setAlert(false)}
+            >
+              <IoMdClose />
+            </IconButton>
+          }
+        >
+          Close me!
+        </Alert>
+      </Collapse>
+
+      <button onClick={() => setAlert(true)}>hhhhhhhh</button>
     </div>
   );
 }
