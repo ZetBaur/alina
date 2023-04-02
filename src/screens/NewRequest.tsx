@@ -34,7 +34,7 @@ import { cities } from '../data/new.request.data';
 function NewRequest() {
   const [requestName, setRequestName] = useState('');
   const [requestAmount, setRequestAmount] = useState('');
-  const [typeValue, setTypeValue] = useState('');
+  const [typeValue, setTypeValue] = useState('classic');
   const [confirmValue, setConfirmValue] = useState('');
   const [getEmailChecked, setGetEmailChecked] = useState(false);
   const [getSmsChecked, setGetSmsChecked] = useState(false);
@@ -56,6 +56,7 @@ function NewRequest() {
       <div>
         <Box sx={{ marginBottom: '25px' }}>
           <TextField
+            size='small'
             error={!requestName}
             fullWidth
             id='outlined-basic'
@@ -68,8 +69,9 @@ function NewRequest() {
           />
         </Box>
 
-        <Box sx={{ marginBottom: '25px' }}>
+        <Box sx={{ marginBottom: '25px', display: 'flex' }}>
           <TextField
+            size='small'
             sx={{ marginRight: '25px' }}
             id='outlined-basic'
             label='Сумма заявки'
@@ -85,9 +87,10 @@ function NewRequest() {
             }}
           />
 
-          <FormControl fullWidth>
+          <FormControl>
             <InputLabel id='request-type'>Тип заявки*</InputLabel>
             <Select
+              size='small'
               error={!typeValue}
               labelId='request-type'
               id='request-type'
@@ -135,6 +138,7 @@ function NewRequest() {
               <FormControlLabel
                 control={
                   <Checkbox
+                    size='small'
                     checked={getEmailChecked}
                     onChange={(event) => {
                       setGetEmailChecked(event.target.checked);
@@ -148,6 +152,7 @@ function NewRequest() {
               <FormControlLabel
                 control={
                   <Checkbox
+                    size='small'
                     checked={getSmsChecked}
                     onChange={(event) => {
                       setGetSmsChecked(event.target.checked);
@@ -160,13 +165,12 @@ function NewRequest() {
             </FormGroup>
           </FormControl>
         </Box>
-
-        <Box>*-обязательные поля</Box>
       </div>
 
       <div>
         <Box sx={{ marginBottom: '25px' }}>
           <TextField
+            size='small'
             id='claimersNumber'
             label='Количество заявителей'
             type='number'
@@ -183,6 +187,7 @@ function NewRequest() {
             <InputLabel id='city'>Город</InputLabel>
 
             <Select
+              size='small'
               labelId='city'
               id='demo'
               label='Город'
@@ -207,7 +212,7 @@ function NewRequest() {
           <span className='p-float-label'>
             <InputMask
               id='phone'
-              className={`${styles.input} p-invalid`}
+              className={`${styles.input} ${!phoneInput ? 'p-invalid' : ''}`}
               value={phoneInput}
               onChange={(e: InputMaskChangeEvent) =>
                 setPhoneInput(e.target.value)
