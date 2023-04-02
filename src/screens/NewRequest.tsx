@@ -19,9 +19,8 @@ import {
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import { InputMask } from 'primereact/inputmask';
+import { InputMask, InputMaskChangeEvent } from 'primereact/inputmask';
 
-// import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import 'dayjs/locale/ru';
@@ -35,13 +34,13 @@ import { cities } from '../data/new.request.data';
 function NewRequest() {
   const [requestName, setRequestName] = useState('');
   const [requestAmount, setRequestAmount] = useState('');
-  const [typeValue, setTypeValue] = useState('classic');
-  const [confirmValue, setConfirmValue] = useState('yes');
+  const [typeValue, setTypeValue] = useState('');
+  const [confirmValue, setConfirmValue] = useState('');
   const [getEmailChecked, setGetEmailChecked] = useState(false);
   const [getSmsChecked, setGetSmsChecked] = useState(false);
   const [claimersNumber, setClaimersNumber] = useState('');
   const [cityValue, setCityValue] = useState('');
-  const [phoneInput, setPhoneInput] = useState('');
+  const [phoneInput, setPhoneInput] = useState<string>('');
   const [requestDate, setRequestDate] = useState<Dayjs | null>(
     dayjs('2022-08-17')
   );
@@ -86,8 +85,8 @@ function NewRequest() {
             }}
           />
 
-          <FormControl>
-            <InputLabel id='request-type'>Тип заявки</InputLabel>
+          <FormControl fullWidth>
+            <InputLabel id='request-type'>Тип заявки*</InputLabel>
             <Select
               error={!typeValue}
               labelId='request-type'
@@ -168,13 +167,10 @@ function NewRequest() {
       <div>
         <Box sx={{ marginBottom: '25px' }}>
           <TextField
-            id='outlined-number'
+            id='claimersNumber'
             label='Количество заявителей'
             type='number'
             variant='filled'
-            InputLabelProps={{
-              shrink: true,
-            }}
             value={claimersNumber}
             onChange={(event) => {
               setClaimersNumber(event.target.value);
@@ -191,7 +187,6 @@ function NewRequest() {
               id='demo'
               label='Город'
               variant='filled'
-              defaultValue='Выберите Ваш город'
               value={cityValue}
               onChange={(e) => {
                 setCityValue(e.target.value);
@@ -209,14 +204,18 @@ function NewRequest() {
 
       <div>
         <Box>
-          <InputMask
-            className={styles.input}
-            value={phoneInput}
-            onChange={(e) => {
-              setPhoneInput(e.target.value);
-            }}
-            mask='+7(999)999-99-99'
-          />
+          <span className='p-float-label'>
+            <InputMask
+              id='phone'
+              className={`${styles.input} p-invalid`}
+              value={phoneInput}
+              onChange={(e: InputMaskChangeEvent) =>
+                setPhoneInput(e.target.value)
+              }
+              mask='+7(999)999-99-99'
+            />
+            <label htmlFor='phone'>Номер телефона*</label>
+          </span>
         </Box>
 
         <Box>
