@@ -1,106 +1,78 @@
+import * as React from 'react';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { columns, rows } from '../data/requests.data';
 
-import { BiEdit } from 'react-icons/bi';
-import { IoMdClose } from 'react-icons/io';
+export default function StickyHeadTable() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-import { rows } from '../data/requests.data';
-import styles from './Requests.module.scss';
-import { TablePagination } from '@mui/material';
-import React, { useState } from 'react';
-
-function Requests() {
-  const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    console.log(newPage);
+  const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   return (
+    // <Paper sx={{ width: '100%', overflow: 'hidden' }}>
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+      <TableContainer sx={{ maxHeight: 530 }}>
+        <Table stickyHeader aria-label='sticky table'>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>ФИО</TableCell>
-              <TableCell align='right'>Номер телефона</TableCell>
-              <TableCell align='right'>Тип заявки</TableCell>
-              <TableCell align='right'>Дата</TableCell>
-              <TableCell align='right'>Кол-во</TableCell>
-              <TableCell align='right'>Город</TableCell>
-              <TableCell align='right'>Звонок</TableCell>
-              <TableCell align='right'>{/* <BiEdit /> */}</TableCell>
-              <TableCell align='right'></TableCell>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.cols}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {rows.map((row, idx) => (
-              <TableRow
-                key={idx}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align='right'>{idx + 1}</TableCell>
-
-                <TableCell component='th' scope='row'>
-                  {row.name}
-                </TableCell>
-                <TableCell align='right'>{row.phone}</TableCell>
-                <TableCell align='right'>{row.type}</TableCell>
-                <TableCell align='right'>{row.date}</TableCell>
-                <TableCell align='right'>{row.quantity}</TableCell>
-                <TableCell align='right'>{row.city}</TableCell>
-                <TableCell align='right'>{row.call}</TableCell>
-
-                <TableCell align='right'>
-                  <BiEdit
-                    className={styles.button}
-                    size={25}
-                    onClick={() => console.log('fffff')}
-                  />
-                </TableCell>
-
-                <TableCell align='right'>
-                  <IoMdClose
-                    className={styles.button}
-                    size={25}
-                    onClick={() => console.log('eeeeee')}
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow hover role='checkbox' tabIndex={-1} key={row.id}>
+                    {columns.map((column) => {
+                      const value = row[column.cols];
+                      return (
+                        <TableCell key={column.cols} align={column.align}>
+                          {column.format ? column.format(value) : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
-
       <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
         component='div'
         count={rows.length}
+        rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </>
+    // </Paper>
   );
 }
-
-export default Requests;
