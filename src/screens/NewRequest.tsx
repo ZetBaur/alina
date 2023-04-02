@@ -21,6 +21,13 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import { InputMask } from 'primereact/inputmask';
 
+// import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import dayjs, { Dayjs } from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/ru';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+
 import styles from './NewRequest.module.scss';
 import { setPageTitle } from '../features/header/header.slice';
 import { cities } from '../data/new.request.data';
@@ -35,6 +42,7 @@ function NewRequest() {
   const [claimersNumber, setClaimersNumber] = useState('');
   const [cityValue, setCityValue] = useState('Алматы');
   const [phoneInput, setPhoneInput] = useState('');
+  const [requestDate, setRequestDate] = useState<Dayjs | null>(dayjs(''));
 
   const dispatch = useAppDispatch();
 
@@ -197,14 +205,25 @@ function NewRequest() {
       </div>
 
       <div>
-        <InputMask
-          className={styles.input}
-          value={phoneInput}
-          onChange={(e) => {
-            setPhoneInput(e.target.value);
-          }}
-          mask='+7(999)999-99-99'
-        />
+        <Box>
+          <InputMask
+            className={styles.input}
+            value={phoneInput}
+            onChange={(e) => {
+              setPhoneInput(e.target.value);
+            }}
+            mask='+7(999)999-99-99'
+          />
+        </Box>
+
+        <Box>
+          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='ru'>
+            <DateCalendar
+              value={requestDate}
+              onChange={(newValue) => setRequestDate(newValue)}
+            />
+          </LocalizationProvider>
+        </Box>
       </div>
     </div>
   );
