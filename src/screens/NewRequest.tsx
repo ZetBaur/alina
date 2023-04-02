@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import {
   Box,
@@ -38,7 +38,7 @@ function NewRequest() {
   const [confirmValue, setConfirmValue] = useState('');
   const [getEmailChecked, setGetEmailChecked] = useState(false);
   const [getSmsChecked, setGetSmsChecked] = useState(false);
-  const [claimersNumber, setClaimersNumber] = useState('');
+  const [claimersNumber, setClaimersNumber] = useState('1');
   const [cityValue, setCityValue] = useState('');
   const [phoneInput, setPhoneInput] = useState<string>('');
   const [requestDate, setRequestDate] = useState<Dayjs | null>(
@@ -55,14 +55,18 @@ function NewRequest() {
     <div className={styles.newRequest}>
       <div>
         <Box sx={{ marginBottom: '25px' }}>
+          <InputLabel shrink id='requestName'>
+            Название заявки*
+          </InputLabel>
+
           <TextField
+            fullWidth
             size='small'
             error={!requestName}
-            fullWidth
-            id='outlined-basic'
-            label='Название заявки*'
-            variant='filled'
+            id='requestName'
+            placeholder='Напишите название заявки'
             value={requestName}
+            InputLabelProps={{ shrink: true }}
             onChange={(event) => {
               setRequestName(event.target.value);
             }}
@@ -70,33 +74,40 @@ function NewRequest() {
         </Box>
 
         <Box sx={{ marginBottom: '25px', display: 'flex' }}>
-          <TextField
-            size='small'
-            sx={{ marginRight: '25px' }}
-            id='outlined-basic'
-            label='Сумма заявки'
-            variant='filled'
-            InputProps={{
-              endAdornment: <InputAdornment position='end'>T</InputAdornment>,
-              inputMode: 'numeric',
-            }}
-            type='number'
-            value={requestAmount}
-            onChange={(event) => {
-              setRequestAmount(event.target.value);
-            }}
-          />
+          <Box sx={{ marginRight: '25px' }}>
+            <InputLabel shrink id='requestAmount'>
+              Сумма заявки
+            </InputLabel>
 
-          <FormControl>
-            <InputLabel id='request-type'>Тип заявки*</InputLabel>
-            <Select
+            <TextField
+              fullWidth
               size='small'
+              id='requestAmount'
+              placeholder='Сумма'
+              InputProps={{
+                endAdornment: <InputAdornment position='end'>T</InputAdornment>,
+                inputMode: 'numeric',
+              }}
+              type='number'
+              value={requestAmount}
+              onChange={(event) => {
+                setRequestAmount(event.target.value);
+              }}
+            />
+          </Box>
+
+          <Box>
+            <InputLabel shrink id='request-type'>
+              Тип заявки*
+            </InputLabel>
+
+            <Select
+              fullWidth
               error={!typeValue}
               labelId='request-type'
               id='request-type'
+              size='small'
               value={typeValue}
-              label='Тип заявки*'
-              variant='filled'
               onChange={(e) => {
                 setTypeValue(e.target.value);
               }}
@@ -104,77 +115,73 @@ function NewRequest() {
               <MenuItem value='classic'>Классический</MenuItem>
               <MenuItem value='standart'>Стандартный</MenuItem>
             </Select>
-          </FormControl>
+          </Box>
         </Box>
 
         <Box sx={{ marginBottom: '25px' }}>
-          <FormControl>
-            <FormLabel id='confirm'>Позвонить для подтверждения</FormLabel>
+          <FormLabel id='confirm'>Позвонить для подтверждения</FormLabel>
 
-            <RadioGroup
-              row
-              aria-labelledby='confirm'
-              defaultValue='yes'
-              name='radio-buttons-group'
-              value={confirmValue}
-              onChange={(e) => {
-                setConfirmValue((e.target as HTMLInputElement).value);
-              }}
-            >
-              <FormControlLabel value='yes' control={<Radio />} label='да' />
+          <RadioGroup
+            row
+            aria-labelledby='confirm'
+            defaultValue='yes'
+            name='radio-buttons-group'
+            value={confirmValue}
+            onChange={(e) => {
+              setConfirmValue((e.target as HTMLInputElement).value);
+            }}
+          >
+            <FormControlLabel value='yes' control={<Radio />} label='да' />
 
-              <FormControlLabel value='no' control={<Radio />} label='нет' />
-            </RadioGroup>
-          </FormControl>
+            <FormControlLabel value='no' control={<Radio />} label='нет' />
+          </RadioGroup>
         </Box>
 
         <Box sx={{ marginBottom: '25px' }}>
-          <FormControl component='fieldset' variant='standard'>
-            <FormLabel component='legend'>
-              Получать дополнительную информацию
-            </FormLabel>
+          <FormLabel component='legend'>
+            Получать дополнительную информацию
+          </FormLabel>
 
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    size='small'
-                    checked={getEmailChecked}
-                    onChange={(event) => {
-                      setGetEmailChecked(event.target.checked);
-                    }}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                  />
-                }
-                label='Письма на почту'
-              />
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={getEmailChecked}
+                  onChange={(event) => {
+                    setGetEmailChecked(event.target.checked);
+                  }}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              }
+              label='Письма на почту'
+            />
 
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    size='small'
-                    checked={getSmsChecked}
-                    onChange={(event) => {
-                      setGetSmsChecked(event.target.checked);
-                    }}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                  />
-                }
-                label='СМС на телефон'
-              />
-            </FormGroup>
-          </FormControl>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={getSmsChecked}
+                  onChange={(event) => {
+                    setGetSmsChecked(event.target.checked);
+                  }}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              }
+              label='СМС на телефон'
+            />
+          </FormGroup>
         </Box>
       </div>
 
       <div>
         <Box sx={{ marginBottom: '25px' }}>
+          <InputLabel shrink id='request-type'>
+            Количество заявителей
+          </InputLabel>
+
           <TextField
             size='small'
             id='claimersNumber'
-            label='Количество заявителей'
             type='number'
-            variant='filled'
             value={claimersNumber}
             onChange={(event) => {
               setClaimersNumber(event.target.value);
@@ -183,44 +190,54 @@ function NewRequest() {
         </Box>
 
         <Box sx={{ marginBottom: '25px' }}>
-          <FormControl fullWidth>
-            <InputLabel id='city'>Город</InputLabel>
+          <InputLabel shrink id='city'>
+            Город
+          </InputLabel>
 
-            <Select
-              size='small'
-              labelId='city'
-              id='demo'
-              label='Город'
-              variant='filled'
-              value={cityValue}
-              onChange={(e) => {
-                setCityValue(e.target.value);
-              }}
-            >
-              {cities.map((el, idx) => (
-                <MenuItem key={idx} value={el}>
-                  {el}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <Select
+            fullWidth
+            displayEmpty
+            size='small'
+            labelId='city'
+            placeholder='Выберите Ваш город'
+            defaultValue='Выберите Ваш город'
+            value={cityValue}
+            onChange={(e) => {
+              setCityValue(e.target.value);
+            }}
+            renderValue={(selected) => {
+              if (selected.length === 0) {
+                return (
+                  <span className={styles.placeholder}>Выберите Ваш город</span>
+                );
+              }
+              return selected;
+            }}
+          >
+            {cities.map((el, idx) => (
+              <MenuItem key={idx} value={el}>
+                {el}
+              </MenuItem>
+            ))}
+          </Select>
         </Box>
       </div>
 
       <div>
         <Box>
-          <span className='p-float-label'>
-            <InputMask
-              id='phone'
-              className={`${styles.input} ${!phoneInput ? 'p-invalid' : ''}`}
-              value={phoneInput}
-              onChange={(e: InputMaskChangeEvent) =>
-                setPhoneInput(e.target.value)
-              }
-              mask='+7(999)999-99-99'
-            />
-            <label htmlFor='phone'>Номер телефона*</label>
-          </span>
+          <InputLabel shrink id='city'>
+            Номер телефона*
+          </InputLabel>
+
+          <InputMask
+            id='phone'
+            className={`${styles.input} ${!phoneInput ? 'p-invalid' : ''}`}
+            value={phoneInput}
+            onChange={(e: InputMaskChangeEvent) =>
+              setPhoneInput(e.target.value)
+            }
+            mask='+7(999)999-99-99'
+          />
         </Box>
 
         <Box>
