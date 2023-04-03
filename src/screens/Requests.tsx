@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,6 +14,8 @@ import styles from './Requests.module.scss';
 import { Data } from '../data/requests.data';
 import Modal from '@mui/material/Modal';
 import { Box, Button, Stack, Typography } from '@mui/material';
+import { setPageTitle } from '../features/header/header.slice';
+import { useAppDispatch } from '../hooks/reduxHooks';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -33,8 +35,11 @@ export default function Requests() {
   const [rowsPerPage, setRowsPerPage] = useState(20);
   const [showModal, setShowModal] = useState(false);
   const [currentRow, setCurrentRow] = useState<Data | null>(null);
+  const dispatch = useAppDispatch();
 
-  // let currentRow: Data | null = null;
+  useEffect(() => {
+    dispatch(setPageTitle('Мои заявки'));
+  }, []);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
