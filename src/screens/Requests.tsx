@@ -126,6 +126,7 @@ export default function Requests() {
       </TableContainer>
 
       <TablePagination
+        component='div'
         rowsPerPageOptions={[10, 20, 40]}
         count={rowData.length}
         rowsPerPage={rowsPerPage}
