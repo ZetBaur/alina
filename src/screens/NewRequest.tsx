@@ -53,7 +53,7 @@ function NewRequest() {
   const [getSmsChecked, setGetSmsChecked] = useState(false);
   const [claimersNumber, setClaimersNumber] = useState('');
   const [cityValue, setCityValue] = useState('');
-  const [phoneInput, setPhoneInput] = useState<string>('');
+  const [phoneInput, setPhoneInput] = useState<any>('');
   const [requestDate, setRequestDate] = useState<Dayjs | null>(
     dayjs(dayjs(Date()).format().slice(0, 10))
   );
