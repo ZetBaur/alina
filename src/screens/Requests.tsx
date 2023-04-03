@@ -12,11 +12,29 @@ import { BiEdit } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
 import styles from './Requests.module.scss';
 import { Data } from '../data/requests.data';
+import Modal from '@mui/material/Modal';
+import { Box, Button, Stack, Typography } from '@mui/material';
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function Requests() {
   const [rowData, setRowData] = useState<Data[]>(rows);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(20);
+  const [showModal, setShowModal] = useState(false);
+  const [currentRow, setCurrentRow] = useState<Data | null>(null);
+
+  // let currentRow: Data | null = null;
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -32,9 +50,15 @@ export default function Requests() {
     setPage(0);
   };
 
-  const removeRow = (id: string) => {
-    const newData = rowData.filter((row) => row.id !== id);
+  const handleRemoveRow = (row: Data) => {
+    setCurrentRow(row);
+    setShowModal(true);
+  };
+
+  const removeRow = () => {
+    const newData = rowData.filter((row) => row.id !== currentRow?.id);
     setRowData(newData);
+    setShowModal(false);
   };
 
   return (
@@ -87,7 +111,7 @@ export default function Requests() {
                   <IoMdClose
                     size={25}
                     className={styles.button}
-                    onClick={() => removeRow(row.id)}
+                    onClick={() => handleRemoveRow(row)}
                   />
                 </TableCell>
               </TableRow>
@@ -104,6 +128,31 @@ export default function Requests() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+
+      <Modal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={style}>
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
+            Удалить заявку <b>"{currentRow?.id}"</b>
+          </Typography>
+
+          <br />
+
+          <Stack direction='row' justifyContent='center' spacing={5}>
+            <Button variant='outlined' onClick={() => setShowModal(false)}>
+              Отменить
+            </Button>
+
+            <Button variant='contained' onClick={removeRow}>
+              Подтвердить
+            </Button>
+          </Stack>
+        </Box>
+      </Modal>
     </>
   );
 }
