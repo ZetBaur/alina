@@ -12,7 +12,6 @@ import { currencyData } from '../data/chart.data';
 
 const CustomizedAxisTick: FunctionComponent<any> = (props: any) => {
   const { x, y, payload } = props;
-
   return (
     <g transform={`translate(${x},${y})`}>
       <text dy={16} textAnchor='end' fill='#666'>

@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-
 import { Header, Menu, ScreenWrapper } from '../components';
 import styles from './MainLayout.module.scss';
 

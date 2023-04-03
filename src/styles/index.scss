@@ -3,7 +3,7 @@
 }
 
 #root {
-  height: 100%;
+  min-height: 100vh;
   background: #c8e5f7;
 }
 
@@ -41,8 +41,6 @@ aside {
 html,
 body,
 .app {
-  // height: 100%;
-  // width: 100%;
   min-height: 100vh;
   line-height: 1;
   font-size: 16px;

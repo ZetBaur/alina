@@ -7,12 +7,6 @@ function StatisticsChart() {
       <BarChart
         style={{ fontSize: '10px' }}
         data={statisticsData}
-        // margin={{
-        //   top: 5,
-        //   right: 30,
-        //   left: 20,
-        //   bottom: 5,
-        // }}
         barCategoryGap='10%'
       >
         <XAxis dataKey='name' axisLine={false} tickLine={false} />

@@ -1,7 +1,6 @@
 import {
   PieChart,
   Pie,
-  Sector,
   Cell,
   ResponsiveContainer,
   Legend,
