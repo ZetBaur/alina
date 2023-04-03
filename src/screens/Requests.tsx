@@ -13,16 +13,15 @@ import { IoMdClose } from 'react-icons/io';
 import styles from './Requests.module.scss';
 import { Data } from '../data/requests.data';
 
-export default function StickyHeadTable() {
-  const [page, setPage] = React.useState(0);
+export default function Requests() {
+  const [rowData, setRowData] = useState<Data[]>(rows);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(20);
-  const [visibleRows, setVisibleRows] = useState<Data[] | null>(null);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
-    console.log('newPage', newPage);
     setPage(newPage);
   };
 
@@ -33,9 +32,14 @@ export default function StickyHeadTable() {
     setPage(0);
   };
 
+  const removeRow = (id: string) => {
+    const newData = rowData.filter((row) => row.id !== id);
+    setRowData(newData);
+  };
+
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className={styles.requests}>
         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
             <TableRow>
@@ -53,7 +57,13 @@ export default function StickyHeadTable() {
           </TableHead>
 
           <TableBody>
-            {rows.map((row) => (
+            {(rowsPerPage > 0
+              ? rowData.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : rowData
+            ).map((row) => (
               <TableRow
                 key={row.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -74,7 +84,11 @@ export default function StickyHeadTable() {
                 </TableCell>
 
                 <TableCell align='right'>
-                  <IoMdClose size={25} className={styles.button} />
+                  <IoMdClose
+                    size={25}
+                    className={styles.button}
+                    onClick={() => removeRow(row.id)}
+                  />
                 </TableCell>
               </TableRow>
             ))}
@@ -83,21 +97,12 @@ export default function StickyHeadTable() {
       </TableContainer>
 
       <TablePagination
-        rowsPerPageOptions={[20]}
-        // component='div'
-        // colSpan={3}
-        count={rows.length}
+        rowsPerPageOptions={[10, 20, 40]}
+        count={rowData.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        // SelectProps={{
-        //   inputProps: {
-        //     'aria-label': 'rows per page',
-        //   },
-        //   native: true,
-        // }}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        // ActionsComponent={TablePaginationActions}
       />
     </>
   );
