@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { columns, rows } from '../data/requests.data';
+import { IoMdClose } from 'react-icons/io';
 
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
@@ -60,6 +61,9 @@ export default function StickyHeadTable() {
                   </TableRow>
                 );
               })}
+            <TableRow hover role='checkbox'>
+              &#10060;
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
