@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,76 +7,98 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { columns, rows } from '../data/requests.data';
+import { rows } from '../data/requests.data';
+import { BiEdit } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
+import styles from './Requests.module.scss';
+import { Data } from '../data/requests.data';
 
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
+  const [visibleRows, setVisibleRows] = useState<Data[] | null>(null);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    console.log('newPage', newPage);
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setRowsPerPage(+event.target.value);
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   return (
-    // <Paper sx={{ width: '100%', overflow: 'hidden' }}>
     <>
-      <TableContainer sx={{ maxHeight: 530 }}>
-        <Table stickyHeader aria-label='sticky table'>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.cols}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
+              <TableCell>ID</TableCell>
+              <TableCell align='right'>ФИО</TableCell>
+              <TableCell align='right'>Тип заявки</TableCell>
+              <TableCell align='right'>Дата</TableCell>
+              <TableCell align='right'>Кол-во</TableCell>
+              <TableCell align='right'>Город</TableCell>
+              <TableCell align='right'>Кол-во</TableCell>
+              <TableCell align='right'>Звонок</TableCell>
+              <TableCell align='right'></TableCell>
+              <TableCell align='right'></TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role='checkbox' tabIndex={-1} key={row.id}>
-                    {columns.map((column) => {
-                      const value = row[column.cols];
-                      return (
-                        <TableCell key={column.cols} align={column.align}>
-                          {column.format ? column.format(value) : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-            <TableRow hover role='checkbox'>
-              &#10060;
-            </TableRow>
+            {rows.map((row) => (
+              <TableRow
+                key={row.id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component='th' scope='row'>
+                  {row.id}
+                </TableCell>
+                <TableCell align='right'>{row.name}</TableCell>
+                <TableCell align='right'>{row.phone}</TableCell>
+                <TableCell align='right'>{row.type}</TableCell>
+                <TableCell align='right'>{row.date}</TableCell>
+                <TableCell align='right'>{row.quantity}</TableCell>
+                <TableCell align='right'>{row.city}</TableCell>
+                <TableCell align='right'>{row.call}</TableCell>
+
+                <TableCell align='right'>
+                  <BiEdit size={25} className={styles.button} />
+                </TableCell>
+
+                <TableCell align='right'>
+                  <IoMdClose size={25} className={styles.button} />
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
+
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component='div'
+        rowsPerPageOptions={[20]}
+        // component='div'
+        // colSpan={3}
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
+        // SelectProps={{
+        //   inputProps: {
+        //     'aria-label': 'rows per page',
+        //   },
+        //   native: true,
+        // }}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        // ActionsComponent={TablePaginationActions}
       />
     </>
-    // </Paper>
   );
 }

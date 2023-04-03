@@ -61,7 +61,7 @@ export const columns: readonly Column[] = [
   },
 ];
 
-interface Data {
+export interface Data {
   id: string;
   name: string;
   phone: string;
